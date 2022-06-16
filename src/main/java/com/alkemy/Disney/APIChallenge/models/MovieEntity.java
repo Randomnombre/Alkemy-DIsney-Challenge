@@ -1,6 +1,7 @@
 package com.alkemy.Disney.APIChallenge.models;
 
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
