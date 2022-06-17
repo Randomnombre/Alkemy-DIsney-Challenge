@@ -25,6 +25,7 @@ public class MovieEntity {
 	private String title;
 	private Date dateOfCreation;
 	private Double rating;
+	private boolean deleted = Boolean.FALSE;
 	
 	@ManyToMany(
 			cascade = {
@@ -41,7 +42,7 @@ public class MovieEntity {
 		
 	}
 
-	public MovieEntity(Integer movie_id, String image, String title, Date dateOfCreation, Double rating,
+	public MovieEntity(Integer movie_id, String image, String title, Date dateOfCreation, Double rating, boolean deleted,
 			Set<CharacterEntity> characters) {
 		super();
 		this.movie_id = movie_id;
@@ -49,6 +50,7 @@ public class MovieEntity {
 		this.title = title;
 		this.dateOfCreation = dateOfCreation;
 		this.rating = rating;
+		this.deleted = deleted;
 		this.characters = characters;
 	}
 
@@ -90,6 +92,14 @@ public class MovieEntity {
 
 	public void setRating(Double rating) {
 		this.rating = rating;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public Set<CharacterEntity> getCharacters() {

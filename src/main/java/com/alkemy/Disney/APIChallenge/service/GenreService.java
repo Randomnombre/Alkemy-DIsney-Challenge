@@ -11,11 +11,15 @@ import com.alkemy.Disney.APIChallenge.repository.GenreRepository;
 @Service
 public class GenreService {
 
+	private GenreMapper genreMapper;
+
+	private GenreRepository genreRepository;
 	
 	@Autowired
-	private GenreMapper genreMapper;
-	@Autowired
-	private GenreRepository genreRepository;
+	public GenreService(GenreMapper genreMapper, GenreRepository genreRepository) {
+		this.genreMapper = genreMapper;
+		this.genreRepository = genreRepository;
+	}
 	
 	public GenreDTO save(GenreDTO dto) {
 		

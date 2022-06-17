@@ -15,6 +15,7 @@ public class GenreEntity {
 	
 	private String name;
 	private String image;
+	private boolean deleted = Boolean.FALSE;
 	
 	@OneToOne
 	private MovieEntity movie;
@@ -23,11 +24,12 @@ public class GenreEntity {
 		
 	}
 
-	public GenreEntity(Integer genre_id, String name, String image, MovieEntity movie) {
+	public GenreEntity(Integer genre_id, String name, String image, boolean deleted, MovieEntity movie) {
 		super();
 		this.genre_id = genre_id;
 		this.name = name;
 		this.image = image;
+		this.deleted = deleted;
 		this.movie = movie;
 	}
 
@@ -53,6 +55,14 @@ public class GenreEntity {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public MovieEntity getMovie() {

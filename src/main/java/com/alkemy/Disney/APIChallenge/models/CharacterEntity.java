@@ -9,10 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name = "Movie")
+@SQLDelete(sql = "UPDATE character_entity SET deleted = true WHERE character_id=?")
+@Where(clause = "deleted=false")
 public class CharacterEntity {
 
 	@Id
@@ -24,6 +27,7 @@ public class CharacterEntity {
 	private Integer age;
 	private Double weight;
 	private String story;
+	private boolean deleted = Boolean.FALSE;
 	
 	@ManyToMany(mappedBy = "characters", cascade = CascadeType.ALL)
 	private Set<MovieEntity> movies = new HashSet<>();
@@ -32,7 +36,7 @@ public class CharacterEntity {
 		
 	}
 
-	public CharacterEntity(Integer character_id, String image, String name, Integer age, Double weight, String story,
+	public CharacterEntity(Integer character_id, String image, String name, Integer age, Double weight, String story, boolean deleted,
 			Set<MovieEntity> movies) {
 		super();
 		this.character_id = character_id;
@@ -41,6 +45,7 @@ public class CharacterEntity {
 		this.age = age;
 		this.weight = weight;
 		this.story = story;
+		this.deleted = deleted;
 		this.movies = movies;
 	}
 
@@ -90,6 +95,14 @@ public class CharacterEntity {
 
 	public void setStory(String story) {
 		this.story = story;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public Set<MovieEntity> getMovies() {
