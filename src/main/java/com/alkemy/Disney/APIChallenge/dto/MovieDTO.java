@@ -13,18 +13,16 @@ public class MovieDTO {
 	private Date dateOfCreation;
 	private Double rating;
 	private List<CharacterDTO> characters;
-	private GenreDTO genre;
 	
 	public MovieDTO(){}
 
-	public MovieDTO(Integer movie_id, String image, String title, Date dateOfCreation, Double rating, List<CharacterDTO> characters, GenreDTO genre) {
+	public MovieDTO(Integer movie_id, String image, String title, Date dateOfCreation, Double rating, List<CharacterDTO> characters) {
 		this.movie_id = movie_id;
 		this.image = image;
 		this.title = title;
 		this.dateOfCreation = dateOfCreation;
 		this.rating = rating;
 		this.characters = characters;
-		this.genre = genre;
 	}
 
 	public Integer getMovie_id() {
@@ -63,12 +61,4 @@ public class MovieDTO {
 	public void setCharacters(List<CharacterDTO> characters) {
 		this.characters = characters;
 	}
-	public GenreDTO getGenre() {
-		return genre;
-	}
-	public void setGenre(GenreDTO genre) {
-		this.genre = genre;
-	}
-	
-	
 }

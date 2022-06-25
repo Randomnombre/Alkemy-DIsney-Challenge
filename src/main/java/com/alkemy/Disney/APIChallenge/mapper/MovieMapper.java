@@ -28,7 +28,6 @@ public class MovieMapper {
 		entity.setDateOfCreation(dto.getDateOfCreation());
 		entity.setRating(dto.getRating());
 		entity.setCharacters(this.characterMapper.characterDTOList2EntityList(dto.getCharacters())); //si tengo que agregar los personajes cuando se crean, a diferencia de characters
-		entity.setGenre(this.genreMapper.genreDTO2EntityBasic(dto.getGenre()));
 		return entity;
 	}
 	
@@ -40,7 +39,6 @@ public class MovieMapper {
 		dto.setTitle(movieEntity.getTitle());
 		dto.setDateOfCreation(movieEntity.getDateOfCreation());
 		dto.setRating(movieEntity.getRating());
-		dto.setGenre(this.genreMapper.Entity2genreDTO(movieEntity.getGenre()));
 		
 		if(charactersLoaded = true) {
 			
