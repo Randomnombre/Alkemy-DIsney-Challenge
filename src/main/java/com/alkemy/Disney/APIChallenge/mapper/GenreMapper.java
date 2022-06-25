@@ -26,4 +26,19 @@ public class GenreMapper {
 		
 		return genreDTO;
 	}
+
+	public GenreEntity genreDTO2EntityBasic(GenreDTO dto) {
+		GenreEntity genreEntity = new GenreEntity();
+		genreEntity.setName(dto.getName());
+
+		return genreEntity;
+	}
+
+	public GenreDTO Entity2genreDTOBasic(GenreEntity entity) {
+		GenreDTO genreDTO = new GenreDTO();
+		genreDTO.setGenre_id(entity.getGenre_id());
+		genreDTO.setName(entity.getName());
+
+		return genreDTO;
+	}
 }

@@ -27,7 +27,7 @@ public class CharacterService {
 		
 		CharacterEntity entity = characterMapper.characterDto2Entity(dto);
 		CharacterEntity characterSaved = characterRepository.save(entity);
-		CharacterDTO result = characterMapper.characterEntity2Dto(characterSaved);
+		CharacterDTO result = characterMapper.characterEntity2Dto(characterSaved,true);
 		
 		return result;
 	}
@@ -35,7 +35,7 @@ public class CharacterService {
 	public List<CharacterDTO> getAllCharacters() {
 		
 		List<CharacterEntity> entites = characterRepository.findAll();
-		List<CharacterDTO> result = characterMapper.characterEntityList2DtoList(entites);
+		List<CharacterDTO> result = characterMapper.characterEntityList2DtoList(entites, false);
 		
 		return result;
 	}

@@ -3,14 +3,19 @@ package com.alkemy.Disney.APIChallenge.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.alkemy.Disney.APIChallenge.dto.CharacterDTO;
+import com.alkemy.Disney.APIChallenge.dto.MovieDTO;
 import com.alkemy.Disney.APIChallenge.models.CharacterEntity;
 
 @Component
 public class CharacterMapper {
 
+	@Autowired
+	private MovieMapper movieMapper;
+	
 	public CharacterEntity characterDto2Entity(CharacterDTO dto) {
 		
 		CharacterEntity entity = new CharacterEntity();
@@ -19,12 +24,12 @@ public class CharacterMapper {
 		entity.setAge(dto.getAge());
 		entity.setWeight(dto.getWeight());
 		entity.setStory(dto.getStory());
-		entity.setMovies(dto.getMovies());
+		//Adding movies its not part of this method, movies should be added in a different function
 		
 		return entity;
 	}
 	
-	public CharacterDTO characterEntity2Dto(CharacterEntity entity) {
+	public CharacterDTO characterEntity2Dto(CharacterEntity entity , boolean loadedMovie) {
 		
 		CharacterDTO dto = new CharacterDTO();
 		dto.setCharacter_id(entity.getCharacter_id());
@@ -33,19 +38,35 @@ public class CharacterMapper {
 		dto.setAge(entity.getAge());
 		dto.setWeight(entity.getWeight());
 		dto.setStory(entity.getStory());
-		dto.setMovies(entity.getMovies());
+		
+		if(loadedMovie = true) {
+			
+			List<MovieDTO> moviesDto = this.movieMapper.movieEntityList2DtoList(entity.getMovies(), false);
+			
+			dto.setMovies(moviesDto);
+		}
 		
 		return dto;
 	}
 	
-	public List<CharacterDTO> characterEntityList2DtoList(List<CharacterEntity> entities) {
+	public List<CharacterDTO> characterEntityList2DtoList(List<CharacterEntity> entities, boolean moviesLoaded ) {
 		
-		List<CharacterDTO> list = new ArrayList<>();
+		List<CharacterDTO> dtoList = new ArrayList<>();
 		
 		for (CharacterEntity entity : entities) {
-			list.add(this.characterEntity2Dto(entity));
+			dtoList.add(characterEntity2Dto(entity, moviesLoaded));
 		}
 		
-		return list;
+		return dtoList;
+	}
+	
+	public List<CharacterEntity> characterDTOList2EntityList(List<CharacterDTO> dtoList) {
+		
+		List<CharacterEntity> entityList = new ArrayList<>();
+		
+		for(CharacterDTO dto : dtoList) {
+			entityList.add(characterDto2Entity(dto));
+		}
+		return entityList;
 	}
 }

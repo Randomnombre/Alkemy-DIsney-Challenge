@@ -1,9 +1,9 @@
 package com.alkemy.Disney.APIChallenge.models;
 
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class MovieEntity {
@@ -23,7 +26,10 @@ public class MovieEntity {
 	
 	private String image;
 	private String title;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date dateOfCreation;
+	
 	private Double rating;
 	private boolean deleted = Boolean.FALSE;
 	
@@ -34,16 +40,19 @@ public class MovieEntity {
 			})
 	@JoinTable(
 			name = "characters_movies",
-			joinColumns = @JoinColumn(name = "character_id"),
-			inverseJoinColumns = @JoinColumn(name = "movie_id"))
-	private Set<CharacterEntity> characters = new HashSet<>();
+			joinColumns = @JoinColumn(name = "movie_id"),
+			inverseJoinColumns = @JoinColumn(name = "character_id"))
+	private List<CharacterEntity> characters = new ArrayList<>();
+	
+	@OneToOne(mappedBy = "movie", cascade = CascadeType.ALL)
+	private GenreEntity genre;
 	
 	public MovieEntity() {
 		
 	}
 
 	public MovieEntity(Integer movie_id, String image, String title, Date dateOfCreation, Double rating, boolean deleted,
-			Set<CharacterEntity> characters) {
+			List<CharacterEntity> characters, GenreEntity genre) {
 		super();
 		this.movie_id = movie_id;
 		this.image = image;
@@ -52,6 +61,7 @@ public class MovieEntity {
 		this.rating = rating;
 		this.deleted = deleted;
 		this.characters = characters;
+		this.genre = genre;
 	}
 
 	public Integer getMovie_id() {
@@ -102,12 +112,20 @@ public class MovieEntity {
 		this.deleted = deleted;
 	}
 
-	public Set<CharacterEntity> getCharacters() {
+	public List<CharacterEntity> getCharacters() {
 		return characters;
 	}
 
-	public void setCharacters(Set<CharacterEntity> characters) {
+	public void setCharacters(List<CharacterEntity> characters) {
 		this.characters = characters;
+	}
+
+	public GenreEntity getGenre() {
+		return genre;
+	}
+
+	public void setGenre(GenreEntity genre) {
+		this.genre = genre;
 	}
 	
 	

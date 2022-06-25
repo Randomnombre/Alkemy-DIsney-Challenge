@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -18,10 +20,18 @@ public class GenreEntity {
 	private boolean deleted = Boolean.FALSE;
 	
 	@OneToOne
+	@JoinTable(
+			name = "genre_movie",
+			joinColumns = @JoinColumn(name = "genre_id"),
+			inverseJoinColumns = @JoinColumn (name = "movie_id"))
 	private MovieEntity movie;
 
 	public GenreEntity() {
 		
+	}
+
+	public GenreEntity(String name) {
+		this.name = name;
 	}
 
 	public GenreEntity(Integer genre_id, String name, String image, boolean deleted, MovieEntity movie) {
