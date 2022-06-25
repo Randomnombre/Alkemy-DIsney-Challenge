@@ -8,8 +8,20 @@ public class GenreDTO {
 	private String name;
 	private String image;
 	private MovieEntity movie;
-	
-	
+
+	public GenreDTO() {}
+
+	public GenreDTO(String name) {
+		this.name = name;
+	}
+
+	public GenreDTO(Integer genre_id, String name, String image, MovieEntity movie) {
+		this.genre_id = genre_id;
+		this.name = name;
+		this.image = image;
+		this.movie = movie;
+	}
+
 	public Integer getGenre_id() {
 		return genre_id;
 	}

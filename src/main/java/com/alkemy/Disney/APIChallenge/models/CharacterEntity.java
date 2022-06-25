@@ -1,7 +1,7 @@
 package com.alkemy.Disney.APIChallenge.models;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -30,14 +30,14 @@ public class CharacterEntity {
 	private boolean deleted = Boolean.FALSE;
 	
 	@ManyToMany(mappedBy = "characters", cascade = CascadeType.ALL)
-	private Set<MovieEntity> movies = new HashSet<>();
+	private List<MovieEntity> movies = new ArrayList<>();
 	
 	public CharacterEntity() {
 		
 	}
 
 	public CharacterEntity(Integer character_id, String image, String name, Integer age, Double weight, String story, boolean deleted,
-			Set<MovieEntity> movies) {
+			List<MovieEntity> movies) {
 		super();
 		this.character_id = character_id;
 		this.image = image;
@@ -105,11 +105,11 @@ public class CharacterEntity {
 		this.deleted = deleted;
 	}
 
-	public Set<MovieEntity> getMovies() {
+	public List<MovieEntity> getMovies() {
 		return movies;
 	}
 
-	public void setMovies(Set<MovieEntity> movies) {
+	public void setMovies(List<MovieEntity> movies) {
 		this.movies = movies;
 	};
 	

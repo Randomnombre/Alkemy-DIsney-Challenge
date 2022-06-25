@@ -1,9 +1,9 @@
 package com.alkemy.Disney.APIChallenge.dto;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
-import com.alkemy.Disney.APIChallenge.models.CharacterEntity;
+
 
 public class MovieDTO {
 
@@ -12,9 +12,21 @@ public class MovieDTO {
 	private String title;
 	private Date dateOfCreation;
 	private Double rating;
-	private Set<CharacterEntity> characters;
+	private List<CharacterDTO> characters;
+	private GenreDTO genre;
 	
-	
+	public MovieDTO(){}
+
+	public MovieDTO(Integer movie_id, String image, String title, Date dateOfCreation, Double rating, List<CharacterDTO> characters, GenreDTO genre) {
+		this.movie_id = movie_id;
+		this.image = image;
+		this.title = title;
+		this.dateOfCreation = dateOfCreation;
+		this.rating = rating;
+		this.characters = characters;
+		this.genre = genre;
+	}
+
 	public Integer getMovie_id() {
 		return movie_id;
 	}
@@ -45,11 +57,17 @@ public class MovieDTO {
 	public void setRating(Double rating) {
 		this.rating = rating;
 	}
-	public Set<CharacterEntity> getCharacters() {
+	public List<CharacterDTO> getCharacters() {
 		return characters;
 	}
-	public void setCharacters(Set<CharacterEntity> characters) {
+	public void setCharacters(List<CharacterDTO> characters) {
 		this.characters = characters;
+	}
+	public GenreDTO getGenre() {
+		return genre;
+	}
+	public void setGenre(GenreDTO genre) {
+		this.genre = genre;
 	}
 	
 	

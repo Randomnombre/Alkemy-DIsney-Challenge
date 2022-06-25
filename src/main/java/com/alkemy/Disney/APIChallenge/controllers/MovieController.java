@@ -1,5 +1,7 @@
 package com.alkemy.Disney.APIChallenge.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,5 +26,13 @@ public class MovieController {
 		MovieDTO movieSaved = movieService.save(movieDto);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(movieSaved);
+	}
+	
+	@RequestMapping
+	public ResponseEntity<List<MovieDTO>> getAll() {
+		
+		List<MovieDTO> movies = movieService.getAllMovies();
+		
+		return ResponseEntity.ok().body(movies);
 	}
 }

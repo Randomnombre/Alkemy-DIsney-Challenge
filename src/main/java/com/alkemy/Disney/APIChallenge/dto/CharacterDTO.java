@@ -1,8 +1,7 @@
 package com.alkemy.Disney.APIChallenge.dto;
 
-import java.util.Set;
+import java.util.List;
 
-import com.alkemy.Disney.APIChallenge.models.MovieEntity;
 
 public class CharacterDTO {
 
@@ -12,7 +11,7 @@ public class CharacterDTO {
 	private Integer age;
 	private Double weight;
 	private String story;
-	private Set<MovieEntity> movies;
+	private List<MovieDTO> movies;
 	
 	
 	public Integer getCharacter_id() {
@@ -51,10 +50,10 @@ public class CharacterDTO {
 	public void setStory(String story) {
 		this.story = story;
 	}
-	public Set<MovieEntity> getMovies() {
+	public List<MovieDTO> getMovies() {
 		return movies;
 	}
-	public void setMovies(Set<MovieEntity> movies) {
+	public void setMovies(List<MovieDTO> movies) {
 		this.movies = movies;
 	}
 	
