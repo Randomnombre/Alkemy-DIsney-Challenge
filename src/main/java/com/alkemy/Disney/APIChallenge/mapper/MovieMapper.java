@@ -40,7 +40,7 @@ public class MovieMapper {
 		dto.setDateOfCreation(movieEntity.getDateOfCreation());
 		dto.setRating(movieEntity.getRating());
 		
-		if(charactersLoaded = true) {
+		if(charactersLoaded == true) {
 			
 			List<CharacterDTO> moviesDto = this.characterMapper.characterEntityList2DtoList(movieEntity.getCharacters(), false);
 			
