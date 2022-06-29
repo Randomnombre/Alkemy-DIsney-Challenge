@@ -70,16 +70,15 @@ public class CharacterMapper {
 		return entityList;
 	}
 
-	public CharacterEntity characterDto2EntityFull(CharacterDTO dto) {
+	public CharacterEntity characterDto2EntityUpdated(CharacterDTO dto, CharacterEntity entity) {
 
-		CharacterEntity entity = new CharacterEntity();
-		entity.setCharacter_id(dto.getCharacter_id());
+		entity.setCharacter_id(entity.getCharacter_id());
 		entity.setImage(dto.getImage());
 		entity.setName(dto.getName());
 		entity.setAge(dto.getAge());
 		entity.setWeight(dto.getWeight());
 		entity.setStory(dto.getStory());
-		//Adding movies its not part of this method, movies should be added in a different function
+		//Adding movies it is not part of this method, movies should be added in a different function
 
 		return entity;
 	}

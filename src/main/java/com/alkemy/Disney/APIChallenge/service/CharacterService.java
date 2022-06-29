@@ -47,9 +47,16 @@ public class CharacterService {
 	
 	public CharacterDTO update(Integer character_id, CharacterDTO dto) {
 
-		Optional<CharacterEntity> entityToUpdate = characterRepository.findById(character_id);
+		Optional<CharacterEntity> findEntity = characterRepository.findById(character_id);
+		CharacterEntity entityToUpdate = null;
+		if (findEntity.isPresent()) {
+			entityToUpdate = findEntity.get();
+		} else {
+			System.out.println("Character id not present in the database");
+		}
 
-		CharacterEntity entity = characterMapper.characterDto2EntityFull(dto);
+		CharacterEntity entity = characterMapper.characterDto2EntityUpdated(dto, entityToUpdate);
+
 		CharacterEntity characterSaved = characterRepository.save(entity);
 		CharacterDTO result = characterMapper.characterEntity2Dto(characterSaved, false);
 
