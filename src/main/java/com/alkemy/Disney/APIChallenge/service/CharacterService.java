@@ -10,6 +10,7 @@ import com.alkemy.Disney.APIChallenge.dto.CharacterDTO;
 import com.alkemy.Disney.APIChallenge.mapper.CharacterMapper;
 import com.alkemy.Disney.APIChallenge.models.CharacterEntity;
 import com.alkemy.Disney.APIChallenge.repository.CharacterRepository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class CharacterService {
@@ -40,6 +41,17 @@ public class CharacterService {
 		
 		return result;
 	}
+
+	public CharacterDTO getCharacterById(Integer character_id) {
+
+		Optional<CharacterEntity> findEntity = characterRepository.findById(character_id);
+		CharacterDTO result = null;
+		if (findEntity.isPresent()) {
+			CharacterEntity entity = findEntity.get();
+			result = characterMapper.characterEntity2Dto(entity, true);
+		}
+		return result;
+	}
 	
 	public void delete(Integer character_id) {
 		characterRepository.deleteById(character_id);
@@ -56,7 +68,6 @@ public class CharacterService {
 		}
 
 		CharacterEntity entity = characterMapper.characterDto2EntityUpdated(dto, entityToUpdate);
-
 		CharacterEntity characterSaved = characterRepository.save(entity);
 		CharacterDTO result = characterMapper.characterEntity2Dto(characterSaved, false);
 

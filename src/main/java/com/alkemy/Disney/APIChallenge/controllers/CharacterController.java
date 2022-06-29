@@ -33,7 +33,15 @@ public class CharacterController {
 		
 		return ResponseEntity.ok().body(characters);
 	}
-	
+
+	@RequestMapping("/{character_id}")
+	public ResponseEntity<CharacterDTO> findCharacterById(@PathVariable Integer character_id) {
+
+		CharacterDTO character = characterService.getCharacterById(character_id);
+
+		return ResponseEntity.ok().body(character);
+	}
+
 	@DeleteMapping("/{character_id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer character_id) {
 		
