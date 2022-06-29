@@ -39,7 +39,7 @@ public class CharacterMapper {
 		dto.setWeight(entity.getWeight());
 		dto.setStory(entity.getStory());
 		
-		if(loadedMovie = true) {
+		if(loadedMovie == true) {
 			
 			List<MovieDTO> moviesDto = this.movieMapper.movieEntityList2DtoList(entity.getMovies(), false);
 			
@@ -68,5 +68,19 @@ public class CharacterMapper {
 			entityList.add(characterDto2Entity(dto));
 		}
 		return entityList;
+	}
+
+	public CharacterEntity characterDto2EntityFull(CharacterDTO dto) {
+
+		CharacterEntity entity = new CharacterEntity();
+		entity.setCharacter_id(dto.getCharacter_id());
+		entity.setImage(dto.getImage());
+		entity.setName(dto.getName());
+		entity.setAge(dto.getAge());
+		entity.setWeight(dto.getWeight());
+		entity.setStory(dto.getStory());
+		//Adding movies its not part of this method, movies should be added in a different function
+
+		return entity;
 	}
 }

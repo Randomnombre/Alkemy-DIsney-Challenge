@@ -1,6 +1,7 @@
 package com.alkemy.Disney.APIChallenge.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,14 @@ public class CharacterService {
 		characterRepository.deleteById(character_id);
 	}
 	
-	
+	public CharacterDTO update(Integer character_id, CharacterDTO dto) {
+
+		Optional<CharacterEntity> entityToUpdate = characterRepository.findById(character_id);
+
+		CharacterEntity entity = characterMapper.characterDto2EntityFull(dto);
+		CharacterEntity characterSaved = characterRepository.save(entity);
+		CharacterDTO result = characterMapper.characterEntity2Dto(characterSaved, false);
+
+		return result;
+	}
 }
