@@ -42,6 +42,20 @@ public class CharacterController {
 		return ResponseEntity.ok().body(character);
 	}
 
+	@GetMapping
+	public  ResponseEntity<List<CharacterDTO>> getCharactersByFilters(
+			@RequestParam(required = false) String name,
+			@RequestParam(required = false) Integer age,
+			@RequestParam(required = false) Double weight,
+			@RequestParam(required = false) List<Integer> movies
+	) {
+		List<CharacterDTO> characters = this.characterService.getByFilters(name, age, weight, movies);
+
+		List<CharacterDTO> result = this.characterService.getByFilters(name, age, weight, movies);
+
+		return ResponseEntity.ok(result);
+	}
+
 	@DeleteMapping("/{character_id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer character_id) {
 		

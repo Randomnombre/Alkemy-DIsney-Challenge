@@ -3,6 +3,8 @@ package com.alkemy.Disney.APIChallenge.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.alkemy.Disney.APIChallenge.dto.CharacterFiltersDTO;
+import com.alkemy.Disney.APIChallenge.repository.specifications.CharacterSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +12,6 @@ import com.alkemy.Disney.APIChallenge.dto.CharacterDTO;
 import com.alkemy.Disney.APIChallenge.mapper.CharacterMapper;
 import com.alkemy.Disney.APIChallenge.models.CharacterEntity;
 import com.alkemy.Disney.APIChallenge.repository.CharacterRepository;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class CharacterService {
@@ -18,11 +19,14 @@ public class CharacterService {
 	private CharacterMapper characterMapper;
 	
 	private CharacterRepository characterRepository;
-	
+
+	private CharacterSpecification characterSpecification;
+
 	@Autowired
-	public CharacterService(CharacterMapper characterMapper, CharacterRepository characterRepository) {
+	public CharacterService(CharacterMapper characterMapper, CharacterRepository characterRepository, CharacterSpecification characterSpecification) {
 		this.characterMapper = characterMapper;
 		this.characterRepository = characterRepository;
+		this.characterSpecification = characterSpecification;
 	}
 	
 	public CharacterDTO save(CharacterDTO dto) {
@@ -70,6 +74,15 @@ public class CharacterService {
 		CharacterEntity entity = characterMapper.characterDto2EntityUpdated(dto, entityToUpdate);
 		CharacterEntity characterSaved = characterRepository.save(entity);
 		CharacterDTO result = characterMapper.characterEntity2Dto(characterSaved, false);
+
+		return result;
+	}
+
+	public List<CharacterDTO> getByFilters(String name, Integer age, Double weight, List<Integer> movies) {
+
+		CharacterFiltersDTO filtersDTO = new CharacterFiltersDTO(name, age, weight, movies);
+		List<CharacterEntity> entities = this.characterRepository.findAll(this.characterSpecification.getByFilters(filtersDTO));
+		List<CharacterDTO> result = this.characterMapper.characterEntityList2DtoList(entities, true);
 
 		return result;
 	}
