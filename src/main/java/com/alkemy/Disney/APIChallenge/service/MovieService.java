@@ -1,6 +1,7 @@
 package com.alkemy.Disney.APIChallenge.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,21 @@ public class MovieService {
 		List<MovieDTO> result = movieMapper.movieEntityList2DtoList(entity,false);
 		
 		return result;
+	}
+
+	public MovieDTO getMovieById(Integer movie_id) {
+
+		Optional<MovieEntity> findEntity = movieRepository.findById(movie_id);
+		MovieDTO result = null;
+		if (findEntity.isPresent()) {
+			MovieEntity entity = findEntity.get();
+			result = movieMapper.movieEntity2Dto(entity, true);
+		}
+
+		return result;
+	}
+
+	public void delete(Integer movie_id) {
+		movieRepository.deleteById(movie_id);
 	}
 }
