@@ -60,4 +60,14 @@ public class MovieMapper {
 		
 		return dtoList;
 	}
+
+	public MovieEntity movieDto2EntityUpdated(MovieDTO dto, MovieEntity entity) {
+
+		entity.setImage(dto.getImage());
+		entity.setTitle(dto.getTitle());
+		entity.setDateOfCreation(dto.getDateOfCreation());
+		entity.setRating(dto.getRating());
+
+		return entity;
+	}
 }

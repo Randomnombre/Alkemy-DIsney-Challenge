@@ -41,11 +41,30 @@ public class MovieController {
 		return ResponseEntity.ok().body(movie);
 	}
 
+	@GetMapping
+	public ResponseEntity<List<MovieDTO>> getMovieByFilteres(
+			@RequestParam(required = false) String title,
+			@RequestParam(required = false) Integer genre_id,
+			@RequestParam(required = false, defaultValue = "DESC") String order
+	) {
+		List<MovieDTO> movies = this.movieService.getByFilters(title, genre_id, order);
+
+		return ResponseEntity.ok(movies);
+	}
+
 	@DeleteMapping("/{movie_id}")
 	public ResponseEntity<Void> deleteById(@PathVariable Integer movie_id) {
 
 		movieService.delete(movie_id);
 
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
+
+	@PutMapping("{movie_id}")
+	public ResponseEntity<MovieDTO> update(@PathVariable Integer movie_id, @RequestBody MovieDTO movieDTO) {
+
+		MovieDTO characterUpdated = movieService.update(movie_id, movieDTO);
+
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(characterUpdated);
 	}
 }
