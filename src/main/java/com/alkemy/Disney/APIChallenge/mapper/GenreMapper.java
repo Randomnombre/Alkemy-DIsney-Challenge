@@ -1,5 +1,6 @@
 package com.alkemy.Disney.APIChallenge.mapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.alkemy.Disney.APIChallenge.dto.GenreDTO;
@@ -8,11 +9,15 @@ import com.alkemy.Disney.APIChallenge.models.GenreEntity;
 @Component
 public class GenreMapper {
 
+	@Autowired
+	private MovieMapper movieMapper;
+
 	public GenreEntity genreDTO2Entity(GenreDTO dto) {
+
 		GenreEntity genreEntity = new GenreEntity();
 		genreEntity.setName(dto.getName());
 		genreEntity.setImage(dto.getImage());
-		genreEntity.setMovie(dto.getMovie());
+		genreEntity.setMovie(this.movieMapper.movieDtoWithoutCharacters2MovieEntity(dto.getMovie()));
 		
 		return genreEntity;
 	}
@@ -22,7 +27,7 @@ public class GenreMapper {
 		genreDTO.setGenre_id(entity.getGenre_id());
 		genreDTO.setName(entity.getName());
 		genreDTO.setImage(entity.getImage());
-		genreDTO.setMovie(entity.getMovie());
+		genreDTO.setMovie(this.movieMapper.movieEntity2Dto(entity.getMovie(), false));
 		
 		return genreDTO;
 	}

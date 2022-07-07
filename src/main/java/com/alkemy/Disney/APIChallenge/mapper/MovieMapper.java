@@ -70,4 +70,15 @@ public class MovieMapper {
 
 		return entity;
 	}
+
+	public MovieEntity movieDtoWithoutCharacters2MovieEntity(MovieDTO dto) {
+
+		MovieEntity entity = new MovieEntity();
+		entity.setImage(dto.getImage());
+		entity.setTitle(dto.getTitle());
+		entity.setDateOfCreation(dto.getDateOfCreation());
+		entity.setRating(dto.getRating());
+
+		return entity;
+	}
 }

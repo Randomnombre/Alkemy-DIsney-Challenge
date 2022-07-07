@@ -1,12 +1,6 @@
 package com.alkemy.Disney.APIChallenge.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class GenreEntity {
@@ -19,7 +13,7 @@ public class GenreEntity {
 	private String image;
 	private boolean deleted = Boolean.FALSE;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(
 			name = "genre_movie",
 			joinColumns = @JoinColumn(name = "genre_id"),

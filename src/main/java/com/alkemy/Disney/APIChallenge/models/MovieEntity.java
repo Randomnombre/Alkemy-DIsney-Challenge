@@ -43,13 +43,16 @@ public class MovieEntity {
 			joinColumns = @JoinColumn(name = "movie_id"),
 			inverseJoinColumns = @JoinColumn(name = "character_id"))
 	private List<CharacterEntity> characters = new ArrayList<>();
-	
+
+	@OneToOne(mappedBy = "movie", cascade = CascadeType.ALL)
+	private GenreEntity genreEntity;
+
 	public MovieEntity() {
 		
 	}
 
 	public MovieEntity(Integer movie_id, String image, String title, Date dateOfCreation, Double rating, boolean deleted,
-			List<CharacterEntity> characters) {
+			List<CharacterEntity> characters, GenreEntity genreEntity) {
 		super();
 		this.movie_id = movie_id;
 		this.image = image;
@@ -58,6 +61,7 @@ public class MovieEntity {
 		this.rating = rating;
 		this.deleted = deleted;
 		this.characters = characters;
+		this.genreEntity = genreEntity;
 	}
 
 	public Integer getMovie_id() {
@@ -114,5 +118,13 @@ public class MovieEntity {
 
 	public void setCharacters(List<CharacterEntity> characters) {
 		this.characters = characters;
+	}
+
+	public GenreEntity getGenreEntity() {
+		return genreEntity;
+	}
+
+	public void setGenreEntity(GenreEntity genreEntity) {
+		this.genreEntity = genreEntity;
 	}
 }

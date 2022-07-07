@@ -7,7 +7,7 @@ public class GenreDTO {
 	private Integer genre_id;
 	private String name;
 	private String image;
-	private MovieEntity movie;
+	private MovieDTO movie;
 
 	public GenreDTO() {}
 
@@ -15,7 +15,7 @@ public class GenreDTO {
 		this.name = name;
 	}
 
-	public GenreDTO(Integer genre_id, String name, String image, MovieEntity movie) {
+	public GenreDTO(Integer genre_id, String name, String image, MovieDTO movie) {
 		this.genre_id = genre_id;
 		this.name = name;
 		this.image = image;
@@ -40,10 +40,10 @@ public class GenreDTO {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public MovieEntity getMovie() {
+	public MovieDTO getMovie() {
 		return movie;
 	}
-	public void setMovie(MovieEntity movie) {
+	public void setMovie(MovieDTO movie) {
 		this.movie = movie;
 	}
 
